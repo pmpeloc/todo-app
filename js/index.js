@@ -21,7 +21,7 @@ let tareas = {
 formulario.addEventListener('submit', (e) => {
   e.preventDefault();
   console.log('Procesando...');
-  console.log(input.value);
+  // console.log(input.value);
   // Llamamos a una función para crear tareas
   setTarea(e);
 });
@@ -39,12 +39,29 @@ const setTarea = (e) => {
     texto: input.value,
     estado: false,
   };
-  console.log(tarea);
+  // console.log(tarea);
   // Agregamos la nueva tarea al objeto tareas
   tareas[tarea.id] = tarea;
-  console.log(tareas);
+  // console.log(tareas);
   // Reiniciamos el formulario
   formulario.reset();
   // Restaurar el focus
   input.focus();
+  // Llamamos a la función para mostrar las tareas
+  mostrarTareas();
+};
+
+const mostrarTareas = () => {
+  // Recorremos el objeto de las tareas para mostarlo en pantalla
+  Object.values(tareas).forEach((tarea) => {
+    console.log(tarea);
+    // Primero clonamos el template
+    const clon = template.cloneNode(true);
+    // Al clon le asignamos el texto
+    clon.querySelector('p').textContent = tarea.texto;
+    // Al fragment le asignamos el clon creado
+    fragment.appendChild(clon);
+  });
+  // Renderizamos en pantalla las tareas
+  listaTarea.appendChild(fragment);
 };
