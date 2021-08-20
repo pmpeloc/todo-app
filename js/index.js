@@ -16,7 +16,7 @@ let tareas = {
   },
 };
 
-console.log(Date.now());
+// console.log(Date.now());
 
 formulario.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -33,6 +33,16 @@ const setTarea = (e) => {
     return;
   }
   console.log('Enviando tarea...');
+  // Creamos la nueva tarea
+  const tarea = {
+    id: Date.now(),
+    texto: input.value,
+    estado: false,
+  };
+  console.log(tarea);
+  // Agregamos la nueva tarea al objeto tareas
+  tareas[tarea.id] = tarea;
+  console.log(tareas);
   // Reiniciamos el formulario
   formulario.reset();
   // Restaurar el focus
