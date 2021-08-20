@@ -16,6 +16,11 @@ let tareas = {
   },
 };
 
+// Mostrar las tareas al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  mostrarTareas();
+});
+
 // console.log(Date.now());
 
 formulario.addEventListener('submit', (e) => {
@@ -52,6 +57,8 @@ const setTarea = (e) => {
 };
 
 const mostrarTareas = () => {
+  // Evitamos el duplicado
+  listaTarea.innerHTML = '';
   // Recorremos el objeto de las tareas para mostarlo en pantalla
   Object.values(tareas).forEach((tarea) => {
     console.log(tarea);
