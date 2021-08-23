@@ -3,18 +3,19 @@ const input = document.getElementById('input-tarea');
 const listaTarea = document.getElementById('lista-tareas');
 const template = document.getElementById('template-alerta').content;
 const fragment = document.createDocumentFragment();
-let tareas = {
-  123: {
-    id: 123,
-    texto: 'Tarea 1',
-    estado: false,
-  },
-  456: {
-    id: 456,
-    texto: 'Tarea 2',
-    estado: false,
-  },
-};
+// let tareas = {
+//   123: {
+//     id: 123,
+//     texto: 'Tarea 1',
+//     estado: false,
+//   },
+//   456: {
+//     id: 456,
+//     texto: 'Tarea 2',
+//     estado: false,
+//   },
+// };
+let tareas = {};
 
 // Mostrar las tareas al cargar
 document.addEventListener('DOMContentLoaded', () => {
@@ -62,6 +63,13 @@ const setTarea = (e) => {
 };
 
 const mostrarTareas = () => {
+  // Verificamos si no tenemos tareas creadas
+  if (Object.values(tareas).length === 0) {
+    listaTarea.innerHTML = `<div class="alert alert-dark text-center">
+      No hay tareas pendientes :)
+    </div>`;
+    return;
+  }
   // Evitamos el duplicado
   listaTarea.innerHTML = '';
   // Recorremos el objeto de las tareas para mostarlo en pantalla
