@@ -71,6 +71,16 @@ const mostrarTareas = () => {
     const clon = template.cloneNode(true);
     // Al clon le asignamos el texto
     clon.querySelector('p').textContent = tarea.texto;
+    // Cambiamos el ícono para la tarea completada
+    if (tarea.estado === true) {
+      clon
+        .querySelector('.alert')
+        .classList.replace('alert-warning', 'alert-primary');
+      clon
+        .querySelectorAll('.fas')[0]
+        .classList.replace('fa-check-circle', 'fa-undo-alt');
+      clon.querySelector('p').style.textDecoration = 'line-through';
+    }
     // Asignamos los ids a los íconos
     clon.querySelectorAll('.fas')[0].dataset.id = tarea.id;
     clon.querySelectorAll('.fas')[1].dataset.id = tarea.id;
@@ -93,6 +103,10 @@ const btnAccion = (e) => {
     delete tareas[e.target.dataset.id];
     mostrarTareas();
     console.log(tareas);
+  }
+  if (e.target.classList.contains('fa-undo-alt')) {
+    tareas[e.target.dataset.id].estado = false;
+    mostrarTareas();
   }
   // Evitar que otros eventos se activen fuera de este contenedor
   e.stopPropagation();
