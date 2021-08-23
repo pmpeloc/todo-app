@@ -19,6 +19,10 @@ let tareas = {};
 
 // Mostrar las tareas al cargar
 document.addEventListener('DOMContentLoaded', () => {
+  // Obtenemos las tareas del Local Storage
+  if (localStorage.getItem('tareas')) {
+    tareas = JSON.parse(localStorage.getItem('tareas'));
+  }
   mostrarTareas();
 });
 
@@ -63,6 +67,8 @@ const setTarea = (e) => {
 };
 
 const mostrarTareas = () => {
+  // Guardamos las tareas en el Local Storage
+  localStorage.setItem('tareas', JSON.stringify(tareas));
   // Verificamos si no tenemos tareas creadas
   if (Object.values(tareas).length === 0) {
     listaTarea.innerHTML = `<div class="alert alert-dark text-center">
