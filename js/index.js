@@ -98,6 +98,7 @@ const mostrarTareas = () => {
     // Asignamos los ids a los íconos
     clon.querySelectorAll('.fas')[0].dataset.id = tarea.id;
     clon.querySelectorAll('.fas')[1].dataset.id = tarea.id;
+    clon.querySelectorAll('.fas')[2].dataset.id = tarea.id;
     // Al fragment le asignamos el clon creado
     fragment.appendChild(clon);
   });
@@ -121,6 +122,12 @@ const btnAccion = (e) => {
   if (e.target.classList.contains('fa-undo-alt')) {
     tareas[e.target.dataset.id].estado = false;
     mostrarTareas();
+  }
+  // Reproducir la tarea
+  if (e.target.classList.contains('fa-play-circle')) {
+    speechSynthesis.speak(
+      new SpeechSynthesisUtterance(tareas[e.target.dataset.id].texto)
+    );
   }
   // Evitar que otros eventos se activen fuera de este contenedor
   e.stopPropagation();
