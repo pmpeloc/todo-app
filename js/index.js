@@ -125,3 +125,26 @@ const btnAccion = (e) => {
   // Evitar que otros eventos se activen fuera de este contenedor
   e.stopPropagation();
 };
+
+// Agregar funcionalidad que permite agregar tareas de voz
+let reconocimiento = undefined;
+
+// Segundo: Empezar a escuchar lo que el usuario habla
+const escuchar = (e) => {
+  let index = e.resultIndex;
+  let content = e.results[index][0].transcript;
+  // console.log(content);
+  input.value = content;
+};
+
+// Primero: Comprobamos si esta disponible la funcionalidad e iniciar configuración
+if (!('webkitSpeechRecognition' in window)) {
+  alert('Usted no puede usar el micrófono');
+} else {
+  reconocimiento = new webkitSpeechRecognition();
+  reconocimiento.lang = 'es-AR';
+  reconocimiento.continuous = true;
+  reconocimiento.interim = true;
+  reconocimiento.addEventListener('result', escuchar);
+  reconocimiento.start();
+}
