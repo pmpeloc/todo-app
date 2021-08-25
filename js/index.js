@@ -99,6 +99,8 @@ const mostrarTareas = () => {
     clon.querySelectorAll('.fas')[0].dataset.id = tarea.id;
     clon.querySelectorAll('.fas')[1].dataset.id = tarea.id;
     clon.querySelectorAll('.fas')[2].dataset.id = tarea.id;
+    clon.querySelectorAll('.fas')[3].dataset.id = tarea.id;
+    clon.querySelector('.upgrade').dataset.id = tarea.id;
     // Al fragment le asignamos el clon creado
     fragment.appendChild(clon);
   });
@@ -128,6 +130,25 @@ const btnAccion = (e) => {
     speechSynthesis.speak(
       new SpeechSynthesisUtterance(tareas[e.target.dataset.id].texto)
     );
+  }
+  // Editar una tarea
+  if (e.target.classList.contains('fa-edit')) {
+    // Ocultar el párrafo y mostrar el input
+    document.querySelector('p').hidden = true;
+    const entradas = document.querySelectorAll('input[data-id]');
+    const elegido = [...entradas].find(
+      (entrada) => entrada.getAttribute('data-id') === e.target.dataset.id
+    );
+    elegido.value = tareas[e.target.dataset.id].texto;
+    elegido.hidden = false;
+    // Guardar el cambio, ocultar el input y mostrar el párrafo
+    elegido.addEventListener('blur', () => {
+      tareas[e.target.dataset.id].texto = elegido.value;
+      console.log(tareas);
+      elegido.hidden = true;
+      document.querySelector('p').hidden = false;
+      mostrarTareas();
+    });
   }
   // Evitar que otros eventos se activen fuera de este contenedor
   e.stopPropagation();

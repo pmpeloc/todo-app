@@ -29,6 +29,7 @@
           placeholder="Ingrese tarea"
           class="form-control my-2"
           autofocus
+          autocomplete="off"
         />
         <button class="btn btn-block btn-primary" type="submit">Agregar</button>
       </form>
@@ -45,10 +46,18 @@
         "
       >
         <p class="m-0">Tarea 1</p>
+        <input
+          type="text"
+          class="upgrade form-control"
+          style="width: 40%"
+          hidden
+          autocomplete="off"
+        />
         <h3 class="m-0">
           <i class="fas fa-check-circle text-success" role="button"></i>
           <i class="fas fa-minus-circle text-danger" role="button"></i>
           <i class="fas fa-play-circle text-primary" role="button"></i>
+          <i class="fas fa-edit text-secondary" role="button"></i>
         </h3>
       </div>
     </template>
